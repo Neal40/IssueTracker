@@ -1,6 +1,7 @@
 package geiffel.da4.issuetracker.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,10 @@ public class UserController {
     private UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(@Qualifier("jpa") UserService userService) {
         this.userService=userService;
     }
+
 
     @GetMapping("")
     public List<User> getAll() {
