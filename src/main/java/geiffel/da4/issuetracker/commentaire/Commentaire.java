@@ -2,10 +2,17 @@ package geiffel.da4.issuetracker.commentaire;
 
 import geiffel.da4.issuetracker.issue.Issue;
 import geiffel.da4.issuetracker.user.User;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
+@Entity
 public class Commentaire {
+    @Id
     private Long id;
+    @ManyToOne
     private User author;
+    @ManyToOne
     private Issue issue;
     private String contenu;
 
@@ -14,7 +21,7 @@ public class Commentaire {
         this.author = author;
         this.issue = issue;
         this.contenu = contenu;
-        //this.author.addCommentaire(this);
+        this.author.addCommentaire(this);
         this.issue.addCommentaire(this);
 
     }

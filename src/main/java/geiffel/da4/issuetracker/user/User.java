@@ -3,6 +3,7 @@ package geiffel.da4.issuetracker.user;
 import geiffel.da4.issuetracker.commentaire.Commentaire;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,8 @@ public class User {
     private Long id;
     private String nom;
     private Fonction fonction;
-    //private List<Commentaire> commentaireEcrits;
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Commentaire> commentaireEcrits;
 
 
     public User() {
@@ -25,14 +27,13 @@ public class User {
         this.id = id;
         this.nom = nom;
         this.fonction = fonction;
-        //this.commentaireEcrits= new ArrayList<>();
+        this.commentaireEcrits= new ArrayList<>();
 
     }
-
-    /*public void addCommentaire(Commentaire commentaire){
+    public void addCommentaire(Commentaire commentaire){
         this.commentaireEcrits.add(commentaire);
 
-    }*/
+    }
 
 
 
@@ -60,13 +61,13 @@ public class User {
         this.fonction = fonction;
     }
 
-    /*public List<Commentaire> getCommentaireEcrits() {
+    public List<Commentaire> getCommentaireEcrits() {
         return commentaireEcrits;
     }
 
     public void setCommentaireEcrits(List<Commentaire> commentaireEcrits) {
         this.commentaireEcrits = commentaireEcrits;
-    }*/
+    }
 
 
     @Override

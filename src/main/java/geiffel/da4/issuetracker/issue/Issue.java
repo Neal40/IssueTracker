@@ -3,26 +3,29 @@ package geiffel.da4.issuetracker.issue;
 import geiffel.da4.issuetracker.commentaire.Commentaire;
 import geiffel.da4.issuetracker.user.User;
 import geiffel.da4.issuetracker.utils.TimestampUtils;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+@Entity
 public class Issue {
-
+    @Id
     private Long code;
     private String title;
     private String content;
+    @ManyToOne
     private User emitter;
 
     private Timestamp dateCreated;
     private Timestamp dateClosed;
-
+    @OneToMany(mappedBy = "issue")
     private List<Commentaire> commentaires;
-
-
-
+    public Issue(){}
     public Issue(Long code, String title, String content, User emitter, Timestamp dateCreated, Timestamp dateClosed) {
         this.code = code;
         this.title = title;
