@@ -2,12 +2,11 @@ package geiffel.da4.issuetracker.commentaire;
 
 import geiffel.da4.issuetracker.exceptions.ResourceAlreadyExistsException;
 import geiffel.da4.issuetracker.exceptions.ResourceNotFoundException;
-import geiffel.da4.issuetracker.user.User;
 import geiffel.da4.issuetracker.utils.LocalService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CommentaireLocalService extends LocalService<Commentaire, Long>
@@ -34,13 +33,13 @@ public class CommentaireLocalService extends LocalService<Commentaire, Long>
     @Override
     public List<Commentaire> getAllByAuthorId(Long id) {
         return allValues.stream()
-                .filter(commentaire -> commentaire.getAuthorId()==id)
+                .filter(commentaire -> Objects.equals(commentaire.getAuthorId(), id))
                 .toList();
     }
     @Override
     public List<Commentaire> getAllByIssueCode(Long code) {
         return this.allValues.stream()
-                .filter(commentaire -> commentaire.getIssueCode()==code)
+                .filter(commentaire -> Objects.equals(commentaire.getIssueCode(), code))
                 .toList();
     }
 
